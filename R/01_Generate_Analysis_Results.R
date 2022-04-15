@@ -41,7 +41,7 @@ SWMPrStorm::single_storm_track(storm_vars)
 stations <- sampling_stations[(sampling_stations$NERR.Site.ID == reserve
                                & sampling_stations$Status == 'Active'), ]$Station.Code
 
-path_to_shp <- input_Master[1,3]
+path_to_shp <- input_Master[2,2]
 
 sf::sf_use_s2(FALSE)
 res_spatial <- sf::st_read(path_to_shp) %>%
