@@ -41,7 +41,8 @@ SWMPrStorm::single_storm_track(storm_vars)
 stations <- sampling_stations[(sampling_stations$NERR.Site.ID == reserve
                                & sampling_stations$Status == 'Active'), ]$Station.Code
 
-path_to_shp <- input_Master[2,2]
+input_Parameters <- openxlsx::read.xlsx(var_in, sheet = "reserve_map")
+path_to_shp <- input_Parameters[1,2]
 
 sf::sf_use_s2(FALSE)
 res_spatial <- sf::st_read(path_to_shp) %>%
@@ -51,17 +52,14 @@ res_spatial <- sf::st_read(path_to_shp) %>%
 
 to_match <- c('wq', 'met')
 stns <- stations[grep(paste(to_match, collapse = '|'), stations)]
-shp_fl <- res_spatial
-bounding <- as.vector(sf::st_bbox(res_spatial))
-lab_dir <- c('R', 'R', 'L', NA, 'L')
+print_lab_dir_stn_order(reserve)
+lab_dir <- unlist(strsplit(input_Parameters[2,2],", "))
 labs <- substr(stns, 4,5)
-pos <- 'bottomleft'
-
-m <- SWMPrStorm::res_local_map(reserve, stations = stns, bbox = bounding, lab_loc = lab_dir, scale_pos = pos, shp = shp_fl)    
 
 res_map_ttl <- paste('output/maps/', reserve, '_reserve_map.png', sep = '')
 
-mapview::mapshot(m, file = res_map_ttl, remove_url = T, selfcontained = F, vwidth = 250, vheight = 250)
+htmlwidgets::saveWidget(m, file = paste0('output/maps/m.html'))
+webshot::webshot(url = paste0('output/maps/m.html'), file = res_map_ttl, vwidth = 250, vheight = 250) 
 
 
 ### wind rose ###

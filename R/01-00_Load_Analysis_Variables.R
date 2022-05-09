@@ -26,10 +26,10 @@ dat <- "data/cdmo"
 
 ## Set primary reserve using 'Master' tab from variable inptus
 
-input_Master <- xlsx::read.xlsx(vars, sheetName = "MASTER")
+input_Master <- openxlsx::read.xlsx(vars, sheet = "MASTER")
 reserve <- input_Master[1,2]
 
 stations <- sampling_stations %>%
-  filter(NERR.Site.ID == reserve)
+  dplyr::filter(NERR.Site.ID == reserve)
 
 
