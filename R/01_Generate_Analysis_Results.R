@@ -41,7 +41,7 @@ SWMPrStorm::single_storm_track(storm_vars)
 stations <- sampling_stations[(sampling_stations$NERR.Site.ID == reserve
                                & sampling_stations$Status == 'Active'), ]$Station.Code
 
-input_Parameters <- openxlsx::read.xlsx(var_in, sheet = "reserve_map")
+input_Parameters <- openxlsx::read.xlsx(vars, sheet = "reserve_map")
 path_to_shp <- input_Parameters[1,2]
 
 sf::sf_use_s2(FALSE)
@@ -55,6 +55,8 @@ stns <- stations[grep(paste(to_match, collapse = '|'), stations)]
 print_lab_dir_stn_order(reserve)
 lab_dir <- unlist(strsplit(input_Parameters[2,2],", "))
 labs <- substr(stns, 4,5)
+
+m <- SWMPrStorm::res_local_map(reserve, stations = stns, bbox = bounding, lab_loc = lab_dir, scale_pos = pos, shp = shp_fl)  
 
 res_map_ttl <- paste('output/maps/', reserve, '_reserve_map.png', sep = '')
 
