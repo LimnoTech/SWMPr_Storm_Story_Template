@@ -52,9 +52,12 @@ res_spatial <- sf::st_read(path_to_shp) %>%
 
 to_match <- c('wq', 'met')
 stns <- stations[grep(paste(to_match, collapse = '|'), stations)]
+shp_fl <- res_spatial
+bounding <- as.vector(sf::st_bbox(res_spatial))
 print_lab_dir_stn_order(reserve)
 lab_dir <- unlist(strsplit(input_Parameters[2,2],", "))
 labs <- substr(stns, 4,5)
+pos <- 'bottomleft'
 
 m <- SWMPrStorm::res_local_map(reserve, stations = stns, bbox = bounding, lab_loc = lab_dir, scale_pos = pos, shp = shp_fl)  
 
