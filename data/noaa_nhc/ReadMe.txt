@@ -18,7 +18,7 @@ NHC GIS Archive - Tropical Cyclone Best Track: https://www.nhc.noaa.gov/gis/arch
 
 
 
-Hurrican Storm Track File Key:
+Hurricane Storm Track File Key:
 
 al182012_best_track = Sandy 2012
 al142016_best_track = Matthew 2016
