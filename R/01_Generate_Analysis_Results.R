@@ -26,7 +26,7 @@ SWMPrStorm::event_timeseries(vars, dat)
 SWMPrStorm::event_timeseries_hourly(vars, dat)
 
 ### Event Time Series Dual ###
-SWMPrStorm::event_timeseries_dual(vars, dat)
+SWMPrStorm::event_timeseries_dual(vars, dat, stn_wq = "acefjwq")
 
 ### Precip bar plot ###
 SWMPrStorm::event_timeseries_precip(vars, dat)
